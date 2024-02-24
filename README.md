@@ -10,6 +10,7 @@ Alacritty -> tmux -> zsh -> oh-my-zsh -> zsh autosuggestion, zsh highlighting, p
 
 Pour mettre le Dark Mode sur le système avec GTK 3.0:
 - `sudo echo 'gtk-application-prefer-dark-theme = true' >> /user/share/gtk-3.0/settings.ini`  
+
 Pour 4.0:
 ```
 # ~/.config/gtk-4.0/settings.ini
@@ -17,3 +18,6 @@ Pour 4.0:
 [Settings]
 gtk-application-prefer-dark-theme=0
 ```
+
+Pour adaptateur WIFI usb:
+https://github.com/morrownr/88x2bu-20210702

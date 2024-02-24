@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# check if required packages are installed
+if ! command -v xrectsel >/dev/null || ! command -v byzanz-record >/dev/null; then
+  echo "Required packages not found. Please install 'xrectsel' with pip, and 'byzanz'." >&2
+  exit 1
+fi
+
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <duration_seconds> <output_file_name>(saved in ~/Images/GIFs)"
+    exit 1
+fi
+
+# parse arguments
+duration=$1
+output=~/Images/GIFs/"$2".gif
+
+mkdir -p ~/Images/GIFs/
+
+# Prompt the user to select a region of the screen using xrectsel
+echo "Select a region of the screen for the GIF capture..."
+sleep 3
+selected_region=$(xrectsel)
+
+# Parse the selected region into separate variables
+read w h x y <<< $(echo "$selected_region" | tr 'x+' ' ')
+
+# Capture the GIF using byzanz
+echo "Capturing GIF..."
+byzanz-record -c -x "$x" -y "$y" -w "$w" -h "$h" -d "$duration" "$output"
+
+echo "GIF saved to $output."
+
